@@ -37,3 +37,11 @@ spec:
             port: 80
           initialDelaySeconds: 5
           periodSeconds: 10
+        volumeMounts:
+        - name: html-volume
+          mountPath: /usr/share/nginx/html/index.html
+          subPath: index.html
+      volumes:
+      - name: html-volume
+        configMap:
+          name: frontend-html
