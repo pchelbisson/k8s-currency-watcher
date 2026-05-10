@@ -20,6 +20,12 @@ spec:
         app: currency-watcher
         tier: frontend
     spec:
+      nodeSelector:
+        storage: ssd
+      tolerations:
+      - key: "node-role.kubernetes.io/control-plane"
+        operator: "Exists"
+        effect: "NoSchedule"
       containers:
       - name: web-dashboard
         image: nginx:1.27.5
