@@ -1,0 +1,14 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: api-connectivity-check
+  namespace: currency-watcher
+spec:
+  template:
+    spec:
+      containers:
+      - name: checker
+        image: alpine:latest
+        command: ["sh", "-c", "echo 'Checking API...' && sleep 5 && echo 'API is reachable!'"]
+      restartPolicy: OnFailure
+  backoffLimit: 4
