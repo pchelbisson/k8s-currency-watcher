@@ -22,6 +22,22 @@ spec:
     spec:
       nodeSelector:
         storage: ssd
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                    - currency-watcher
+                  - key: tier
+                    operator: In
+                    values:
+                      - frontend
+                topologyKey: "kubernetes.io/hostname"
       tolerations:
       - key: "node-role.kubernetes.io/control-plane"
         operator: "Exists"
