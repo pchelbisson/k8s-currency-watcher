@@ -19,3 +19,11 @@ spec:
         image: redis:7.2-alpine
         ports:
           - containerPort: 6379
+        volumeMounts:
+          - mountPath: /data
+            name: redis-data
+      volumes:
+        - name: redis-data
+          hostPath:
+            path: /var/lib/redis-local
+            type: DirectoryOrCreate
